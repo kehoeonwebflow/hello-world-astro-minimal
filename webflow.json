@@ -1,5 +1,21 @@
 {
   "cloud": {
     "framework": "astro"
+  },
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1777402490705,
+      "version": "1.19.0"
+    }
+  },
+  "siteId": "69f0e7958745ef8d36ba35ae",
+  "devlink-export": {
+    "rootDir": "/src/components",
+    "components": ".*",
+    "componentGroups": ".*",
+    "ts": true,
+    "cssScopes": true,
+    "relativeHrefRoot": "/"
   }
 }

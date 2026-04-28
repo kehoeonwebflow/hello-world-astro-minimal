@@ -1,11 +1,28 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/*
+ * Bridge between the Astro shell (html/body) and the Webflow design system
+ * defined in src/components/css/. Those files use @scope, so their `body`
+ * rules don't actually reach the real <body>. We re-apply the same rules
+ * here using the design tokens declared on :root in variables.css.
+ *
+ * Do NOT edit src/components/css/* — those are generated from Webflow.
+ */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--_colors---background-color--bg-primary, #fff);
+  color: var(--_colors---text-color--text-primary, #333);
+  font-family: var(--_typography---font--body-font, Arial, sans-serif);
+  font-size: var(--_typography---base-typography--base-font-size, 1rem);
+  line-height: var(--_typography---base-typography--base-line-height, 1.6rem);
+  letter-spacing: var(
+    --_typography---base-typography--base-letter-spacing,
+    0em
+  );
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,31 +31,17 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--_colors---core-accent-color--accent-primary, inherit);
+  text-decoration: underline;
 }
 a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  color: var(--_colors---core-accent-color--accent-primary-hover, inherit);
 }
 
 #app {
-  max-width: 1280px;
+  max-width: var(--_sizes---container--container-width, 1280px);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--_sizes---spacing--2x, 2rem);
   text-align: center;
 }
 
@@ -60,37 +63,29 @@ h1 {
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--_colors---text-color--text-secondary, #888);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+#counter {
+  font: inherit;
   cursor: pointer;
+  padding: 0.6em 1.2em;
+  border-radius: var(--_sizes---button--button-radius, 0.5rem);
+  border: 1px solid transparent;
+  background-color: var(
+    --_colors---core-accent-color--accent-primary,
+    #1a1a1a
+  );
+  color: var(--_colors---text-color--text-primary, inherit);
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+#counter:hover {
+  border-color: var(
+    --_colors---core-accent-color--accent-primary-hover,
+    #646cff
+  );
 }
-button:focus,
-button:focus-visible {
+#counter:focus,
+#counter:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
