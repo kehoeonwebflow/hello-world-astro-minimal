@@ -1,8 +1,18 @@
 /*
  * Bridge between the Astro shell (html/body) and the Webflow design system
- * defined in src/components/css/. Those files use @scope, so their `body`
- * rules don't actually reach the real <body>. We re-apply the same rules
- * here using the design tokens declared on :root in variables.css.
+ * defined in src/components/css/.
+ *
+ * The Webflow CSS uses @scope (.wf-devlink-...), so its `body` rules don't
+ * reach the real <body>. We re-apply just the page-shell rules here using
+ * the design tokens declared on :root in variables.css.
+ *
+ * Important: don't add unscoped element-level rules (a, h1, p, img, etc.)
+ * here. Webflow's tags.css and classes.css live inside CSS @layer blocks,
+ * which means any unlayered tag rule we add would beat ALL of Webflow's
+ * scoped/class rules (unlayered always wins over layered) and break the
+ * Navigation/Footer link, heading, and image styling. Stick to body and
+ * to selectors that only exist on the Astro index page (.logo, #counter,
+ * .read-the-docs, etc.).
  *
  * Do NOT edit src/components/css/* — those are generated from Webflow.
  */
@@ -28,14 +38,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  color: var(--_colors---core-accent-color--accent-primary, inherit);
-  text-decoration: underline;
-}
-a:hover {
-  color: var(--_colors---core-accent-color--accent-primary-hover, inherit);
 }
 
 #app {
